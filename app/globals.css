@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-blue-custom-1: #1A88C8;
+  --color-blue-custom-2: #187DB7;
+  --color-blue-custom-3: #006EAD;
+  --color-custom-lime: #91BC4D;
+  --color-chart-1: #91BC4D;
+  --color-chart-2: #2E6CA8;
+  --prosuite-blue: #2563eb;
+  --prosuite-blue-dark: #1d4ed8;
+  --prosuite-blue-light: #3b82f6;
+}
+
+body {
+  background-color: #F9FAFB;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+/* ProSuite specific styles */
+.prosuite-sidebar {
+  background-color: var(--prosuite-blue);
+}
+
+.prosuite-sidebar-active {
+  background-color: var(--prosuite-blue-light);
+}
+
+.prosuite-secondary-sidebar {
+  background-color: white;
+  border-right: 1px solid #e5e7eb;
+}
+
