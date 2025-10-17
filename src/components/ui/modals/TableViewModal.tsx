@@ -6,7 +6,7 @@ import Modal from './Modal'
 export interface TableViewConfig {
   title: string
   subtitle?: string
-  type: 'policy' | 'obligation' | 'assessment' | 'action-plan' | 'framework' | 'review'
+  type: 'policy' | 'obligation' | 'assessment' | 'action-plan' | 'framework' | 'review' | 'control' | 'regulation'
   fields: ViewField[]
   sections?: ViewSection[]
   actions?: ViewAction[]

@@ -23,6 +23,7 @@ export default function AddObligation() {
     evidenceRequired: '',
     consequencesOfNonCompliance: '',
     responsibleParty: '',
+    relatedControls: '',
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -423,6 +424,21 @@ ${formData.evidenceRequired ? `📎 Evidence: ${formData.evidenceRequired}` : ''
                   placeholder="e.g., Fines up to €20M or 4% of annual turnover, Criminal prosecution, License revocation"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Related Controls
+                </label>
+                <input
+                  type="text"
+                  name="relatedControls"
+                  value={formData.relatedControls || ''}
+                  onChange={handleChange}
+                  placeholder="e.g., Access Control Policy, Data Encryption, Incident Response Plan"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                />
+                <p className="text-sm text-gray-500 mt-1">Controls that help meet this obligation (comma-separated)</p>
               </div>
             </div>
           </div>
