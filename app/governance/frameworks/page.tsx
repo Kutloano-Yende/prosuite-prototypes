@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
 
 interface Framework {
   id: string
@@ -14,7 +15,9 @@ interface Framework {
 }
 
 export default function FrameworksPage() {
-  const [frameworks] = useState<Framework[]>([
+  const [frameworks, setFrameworks] = useState<Framework[]>([])
+
+  const mockFrameworks: Framework[] = [
     {
       id: '1',
       name: 'ISO 27001',
@@ -55,7 +58,30 @@ export default function FrameworksPage() {
       description: 'Control Objectives for Information and Related Technologies',
       applicablePolicies: 20
     }
-  ])
+  ]
+
+  useEffect(() => {
+    // Load captured frameworks from localStorage
+    const stored = localStorage.getItem('capturedFrameworks')
+    const capturedFrameworks = stored ? JSON.parse(stored) : []
+    
+    // Transform captured frameworks to match interface
+    const transformedCaptured = capturedFrameworks.map((fw: any) => ({
+      id: fw.id.toString(),
+      name: fw.frameworkName,
+      type: fw.category,
+      status: fw.status as 'Active' | 'Inactive' | 'Under Review',
+      complianceLevel: fw.complianceLevel === 'Full Compliance' ? 100 :
+                       fw.complianceLevel === 'Partial Compliance' ? 75 :
+                       fw.complianceLevel === 'In Progress' ? 50 : 25,
+      lastUpdated: fw.updatedAt ? new Date(fw.updatedAt).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+      description: fw.description,
+      applicablePolicies: fw.relatedPolicies?.length || 0
+    }))
+    
+    // Combine with mock data
+    setFrameworks([...transformedCaptured, ...mockFrameworks])
+  }, [])
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -81,12 +107,15 @@ export default function FrameworksPage() {
             <h1 className="text-2xl font-bold text-gray-900">Governance Frameworks</h1>
             <p className="text-gray-600 mt-1">Manage compliance frameworks and standards</p>
           </div>
-          <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <Link
+            href="/governance/add-framework"
+            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
             Add Framework
-          </button>
+          </Link>
         </div>
       </div>
 
