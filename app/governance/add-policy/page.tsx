@@ -21,6 +21,8 @@ export default function AddPolicy() {
     description: '',
     frameworks: [] as string[],
     attachments: '',
+    associatedControls: '',
+    reviewFrequency: 'Annually',
   })
 
   const frameworks = ['ISO 31000', 'COSO', 'King IV', 'SOX', 'COBIT', 'NIST', 'Basel III']
@@ -48,6 +50,8 @@ export default function AddPolicy() {
       description: formData.description,
       frameworks: formData.frameworks,
       attachments: formData.attachments ? formData.attachments.split(',').map(s => s.trim()) : [],
+      associatedControls: formData.associatedControls ? formData.associatedControls.split(',').map(s => s.trim()) : [],
+      reviewFrequency: formData.reviewFrequency,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }
@@ -277,7 +281,7 @@ ${formData.frameworks.length > 0 ? `Frameworks: ${formData.frameworks.join(', ')
             <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500">
               Timeline & Review Schedule
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Effective Date <span className="text-red-500">*</span>
@@ -318,6 +322,28 @@ ${formData.frameworks.length > 0 ? `Frameworks: ${formData.frameworks.join(', ')
                   onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Review Frequency <span className="text-red-500">*</span>
+                </label>
+                <select
+                  name="reviewFrequency"
+                  required
+                  value={formData.reviewFrequency}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="Monthly">Monthly</option>
+                  <option value="Quarterly">Quarterly</option>
+                  <option value="Bi-Annually">Bi-Annually</option>
+                  <option value="Annually">Annually</option>
+                  <option value="Every 2 Years">Every 2 Years</option>
+                  <option value="Every 3 Years">Every 3 Years</option>
+                  <option value="As Needed">As Needed</option>
+                </select>
+                <p className="text-sm text-gray-500 mt-1">How often should this policy be reviewed?</p>
               </div>
             </div>
           </div>
@@ -360,6 +386,27 @@ ${formData.frameworks.length > 0 ? `Frameworks: ${formData.frameworks.join(', ')
                 placeholder="Enter comprehensive policy description, objectives, scope, and key requirements..."
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
+            </div>
+          </div>
+
+          {/* Associated Controls Section */}
+          <div className="mb-8">
+            <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-500">
+              Associated Controls
+            </h2>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Controls that Enforce this Policy
+              </label>
+              <textarea
+                name="associatedControls"
+                value={formData.associatedControls}
+                onChange={handleChange}
+                rows={4}
+                placeholder="Enter list of controls (comma-separated), e.g., Access Control, Data Encryption, Multi-Factor Authentication, Password Policy"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+              <p className="text-sm text-gray-500 mt-2">List the controls that enforce this policy (comma-separated)</p>
             </div>
           </div>
 
