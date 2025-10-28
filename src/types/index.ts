@@ -1,8 +1,8 @@
 // Governance Types
-export * from './governance'
+export * from '../../types/governance'
 
 // Compliance Types
-export * from './compliance'
+export * from '../../types/compliance'
 
 // Common Types
 export interface BaseEntity {

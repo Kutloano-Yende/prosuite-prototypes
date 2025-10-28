@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { mockComplianceKPIs, mockObligationsByStatus, mockCriticalObligations } from '@/utils'
+import { mockComplianceKPIs, mockObligationsByStatus, mockCriticalObligations } from '../../utils/mockData/complianceMockData'
+import type { ObligationsByStatus } from '../../types/compliance'
 
 export default function ComplianceDashboard() {
   const [capturedObligations, setCapturedObligations] = useState<any[]>([])
@@ -19,7 +20,7 @@ export default function ComplianceDashboard() {
     ...mockComplianceKPIs,
     totalObligations: mockComplianceKPIs.totalObligations + capturedObligations.length
   }
-  const obligationsByStatus = mockObligationsByStatus
+  const obligationsByStatus: ObligationsByStatus[] = mockObligationsByStatus
   
   // Combine captured obligations with mock data, showing captured ones first
   const criticalObligations = [...capturedObligations.slice().reverse(), ...mockCriticalObligations].slice(0, 5)
@@ -64,7 +65,7 @@ export default function ComplianceDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-500 uppercase">Compliance Rate</p>
-                <p className="text-3xl font-bold text-gray-900">{kpis.complianceRate}%</p>
+                <p className="text-3xl font-bold text-gray-900">{kpis.complianceScore}%</p>
                 <p className="text-sm text-green-600 mt-2">↗ {kpis.monthlyChanges.compliant}% vs last month</p>
               </div>
               <svg className="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -121,12 +122,12 @@ export default function ComplianceDashboard() {
                   fill="none"
                   stroke="#10B981"
                   strokeWidth="20"
-                  strokeDasharray={`${kpis.complianceRate * 6.28}, 628`}
+                  strokeDasharray={`${kpis.complianceScore * 6.28}, 628`}
                   strokeLinecap="round"
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className="text-5xl font-bold text-gray-900">{kpis.complianceRate}%</div>
+                <div className="text-5xl font-bold text-gray-900">{kpis.complianceScore}%</div>
                 <div className="text-sm text-gray-500 mt-2">Compliant</div>
               </div>
             </div>

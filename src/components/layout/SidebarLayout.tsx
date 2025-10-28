@@ -33,7 +33,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
         </svg>
       ),
       href: '/governance',
-      isActive: pathname.startsWith('/governance')
+      isActive: pathname?.startsWith('/governance') ?? false
     },
     {
       id: 'compliance',
@@ -44,7 +44,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
         </svg>
       ),
       href: '/compliance',
-      isActive: pathname.startsWith('/compliance')
+      isActive: pathname?.startsWith('/compliance') ?? false
     }
   ]
 
@@ -163,6 +163,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
   ]
 
   const getCurrentModule = () => {
+    if (!pathname) return null
     if (pathname.startsWith('/governance')) return 'governance'
     if (pathname.startsWith('/compliance')) return 'compliance'
     return null

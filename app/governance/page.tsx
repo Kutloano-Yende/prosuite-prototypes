@@ -64,8 +64,8 @@ export default function GovernanceDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-500 uppercase">Due for Review</p>
-                <p className="text-3xl font-bold text-gray-900">{kpis.policiesDueForReview}</p>
-                <p className="text-sm text-red-600 mt-2">↘ {Math.abs(kpis.monthlyChanges.reviews)}% vs last month</p>
+                <p className="text-3xl font-bold text-gray-900">{kpis.underReview}</p>
+                <p className="text-sm text-red-600 mt-2">↘ {Math.abs(kpis.monthlyChanges.review)}% vs last month</p>
               </div>
               <svg className="w-12 h-12 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -76,9 +76,9 @@ export default function GovernanceDashboard() {
           <div className="bg-white rounded-lg shadow p-6 border-l-4 border-purple-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500 uppercase">Active Frameworks</p>
-                <p className="text-3xl font-bold text-gray-900">{kpis.activeFrameworks}</p>
-                <p className="text-sm text-gray-600 mt-2">↗ {kpis.monthlyChanges.frameworks}% vs last month</p>
+                <p className="text-sm text-gray-500 uppercase">Active Policies</p>
+                <p className="text-3xl font-bold text-gray-900">{kpis.activePolicies}</p>
+                <p className="text-sm text-gray-600 mt-2">↗ {kpis.monthlyChanges.active}% vs last month</p>
               </div>
               <svg className="w-12 h-12 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -89,9 +89,9 @@ export default function GovernanceDashboard() {
           <div className="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500 uppercase">Pending Approvals</p>
-                <p className="text-3xl font-bold text-gray-900">{kpis.pendingApprovals}</p>
-                <p className="text-sm text-green-600 mt-2">↗ {kpis.monthlyChanges.approvals}% vs last month</p>
+                <p className="text-sm text-gray-500 uppercase">Expired Policies</p>
+                <p className="text-3xl font-bold text-gray-900">{kpis.expired}</p>
+                <p className="text-sm text-green-600 mt-2">↗ {kpis.monthlyChanges.expired}% vs last month</p>
               </div>
               <svg className="w-12 h-12 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -138,9 +138,9 @@ export default function GovernanceDashboard() {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Policy Status Distribution</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {policyDistribution.map((item) => (
-              <div key={item.name} className="text-center p-4 rounded-lg" style={{backgroundColor: item.color + '20'}}>
-                <div className="text-3xl font-bold" style={{color: item.color}}>{item.value}</div>
-                <div className="text-sm text-gray-600 mt-2">{item.name}</div>
+              <div key={item.category} className="text-center p-4 rounded-lg" style={{backgroundColor: '#3B82F6' + '20'}}>
+                <div className="text-3xl font-bold" style={{color: '#3B82F6'}}>{item.count}</div>
+                <div className="text-sm text-gray-600 mt-2">{item.category}</div>
               </div>
             ))}
           </div>

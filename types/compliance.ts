@@ -230,7 +230,7 @@ export interface ComplianceKPIs {
 export interface ObligationsByStatus {
   name: string
   value: number
-  color?: string
+  color: string
 }
 
 export interface ObligationsByFrequency {
